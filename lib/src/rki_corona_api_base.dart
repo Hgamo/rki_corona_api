@@ -1,0 +1,71 @@
+import 'dart:convert';
+
+import 'package:http/http.dart';
+
+import 'data/cases.dart';
+import 'data/states.dart';
+
+/// An API for accessing COVID Information for germany from the Robert-Koch-Institut.
+///
+/// To access COVID information you can use:
+/// - `RKICovidAPI.getCases()` for nation wide infos.
+/// - `RKICovidAPI.getStates()` for information about every state.
+/// - `RKICovidAPI.getDisctricts()` for information about every disctrict.
+///
+/// You can also use `statesMapImageURL` and `disctrictsMapImageURL` to get a url for a map of the states and disctricts.
+class RKICovidAPI {
+  /// The url of PNG image of the states of germany
+  static const String statesMapImageURL =
+      'https://rki-covid-api.now.sh/api/states-map';
+
+  /// The url of PNG image of the disctricts in germany
+  static const String disctrictsMapImageURL =
+      'https://rki-covid-api.now.sh/api/districts-map';
+
+  /// Get the current COVID cases of germany.
+  ///
+  /// Returns `null` if the api request failed.
+  /// To get info about specific states and disctricts use `RKICovidAPI.getStates()` or `RKICovidAPI.getDisctricts()`.
+  ///
+  /// To get the current cases:
+  ///```
+  ///var statsGermany = await RKICovidAPI.getCases();
+  ///
+  ///print(statsGermany.deaths.toSring());
+  ///```
+  static Future<CovidCases> getCases() async {
+    var resultMap =
+        await _responseAsMap('https://rki-covid-api.now.sh/api/general');
+    return CovidCases.fromJson(resultMap);
+  }
+
+  /// Get COVID information for every state in germany.
+  ///
+  /// Returns `null` if the api request failed.
+  ///
+  /// To get the current cases for every state:
+  ///```
+  ///  var statsGermany = await RKICovidAPI.getStates();
+  ///
+  ///  for (var state in statsGermany.states) {
+  ///    print(
+  ///       '${state.name}: cases: ${state.count} deaths: ${state.deaths} Cases per 100k: ${state.casesPer100K}');
+  ///  }
+  ///```
+  static Future<CovidStates> getStates() async {
+    var resultMap =
+        await _responseAsMap('https://rki-covid-api.now.sh/api/states');
+    return CovidStates.fromJson(resultMap);
+  }
+
+//TODO: Write documentation
+  static Future getDisctricts() async {
+    var resultMap =
+        await _responseAsMap('https://rki-covid-api.now.sh/api/districts');
+  }
+
+  static Future<Map> _responseAsMap(String url) async {
+    var result = await get(url);
+    return json.decode(result.body);
+  }
+}
