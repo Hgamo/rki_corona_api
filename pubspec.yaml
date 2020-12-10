@@ -1,6 +1,6 @@
 name: rki_corona_api
-description: Unoffical Api for the RKI
-version: 1.0.0
+description: Unoffical Api for the RKI. Uses the rki-covid-api from marlon 360 to get information.
+version: 1.0.1
 repository: https://github.com/RoundedInfinity/rki_corona_api
 environment:
   sdk: ">=2.10.0 <3.0.0"
