@@ -5,7 +5,6 @@ CovidCases covidCasesFromJson(String str) =>
 
 String covidCasesToJson(CovidCases data) => json.encode(data.toJson());
 
-//TODO: Write documentation
 class CovidCases {
   CovidCases({
     this.lastUpdate,
@@ -42,7 +41,6 @@ class CovidCases {
       };
 }
 
-//TODO: Write documentation
 class Difference {
   Difference({
     this.recovered,

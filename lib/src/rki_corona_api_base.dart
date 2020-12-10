@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 import 'data/cases.dart';
+import 'data/districts.dart';
 import 'data/states.dart';
 
 /// An API for accessing COVID Information for germany from the Robert-Koch-Institut.
@@ -58,10 +59,23 @@ class RKICovidAPI {
     return CovidStates.fromJson(resultMap);
   }
 
-//TODO: Write documentation
-  static Future getDisctricts() async {
+  /// Get COVID information for every district in germany.
+  ///
+  /// Returns `null` if the api request failed.
+  ///
+  /// To get the current cases for every district:
+  ///```
+  ///  var statsGermany = await RKICovidAPI.getDisctricts();
+  ///
+  ///  for (var district in statsGermany.districts) {
+  ///    print(
+  ///       '${district.name}: cases: ${district.count} deaths: ${district.deaths} Cases per 100k: ${district.casesPer100K}');
+  ///  }
+  ///```
+  static Future<Districts> getDisctricts() async {
     var resultMap =
         await _responseAsMap('https://rki-covid-api.now.sh/api/districts');
+    return Districts.fromJson(resultMap);
   }
 
   static Future<Map> _responseAsMap(String url) async {
