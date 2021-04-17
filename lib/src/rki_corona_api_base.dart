@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart';
@@ -15,6 +16,11 @@ import 'data/states.dart';
 ///
 /// You can also use `statesMapImageURL` and `disctrictsMapImageURL` to get a url for a map of the states and disctricts.
 class RKICovidAPI {
+  static final _baseUrl = 'rki-covid-api.now.sh';
+  static final _generalUrl = Uri.https(_baseUrl, '/api/general');
+  static final _statesUrl = Uri.https(_baseUrl, '/api/states');
+  static final _districtsUrl = Uri.https(_baseUrl, 'api/districts');
+
   /// The url of PNG image of the states of germany
   static const String statesMapImageURL =
       'https://rki-covid-api.now.sh/api/states-map';
@@ -35,9 +41,8 @@ class RKICovidAPI {
   ///print(statsGermany.deaths.toSring());
   ///```
   static Future<CovidCases> getCases() async {
-    var resultMap =
-        await _responseAsMap('https://rki-covid-api.now.sh/api/general');
-    return CovidCases.fromJson(resultMap);
+    var resultMap = await (_responseAsMap(_generalUrl));
+    return CovidCases.fromJson(resultMap as Map<String, dynamic>);
   }
 
   /// Get COVID information for every state in germany.
@@ -54,9 +59,8 @@ class RKICovidAPI {
   ///  }
   ///```
   static Future<CovidStates> getStates() async {
-    var resultMap =
-        await _responseAsMap('https://rki-covid-api.now.sh/api/states');
-    return CovidStates.fromJson(resultMap);
+    var resultMap = await (_responseAsMap(_statesUrl));
+    return CovidStates.fromJson(resultMap as Map<String, dynamic>);
   }
 
   /// Get COVID information for every district in germany.
@@ -73,12 +77,11 @@ class RKICovidAPI {
   ///  }
   ///```
   static Future<Districts> getDisctricts() async {
-    var resultMap =
-        await _responseAsMap('https://rki-covid-api.now.sh/api/districts');
-    return Districts.fromJson(resultMap);
+    var resultMap = await (_responseAsMap(_districtsUrl));
+    return Districts.fromJson(resultMap as Map<String, dynamic>);
   }
 
-  static Future<Map> _responseAsMap(String url) async {
+  static Future<Map?> _responseAsMap(Uri url) async {
     var result = await get(url);
     return json.decode(result.body);
   }
