@@ -6,3 +6,7 @@
 
 - Fixed export
 - Longer description for more pub points
+
+## 2.0.0
+
+- Added null-safety support
