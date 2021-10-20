@@ -19,7 +19,7 @@ class RKICovidAPI {
   static final _baseUrl = 'thingproxy.freeboard.io/fetch/https://rki-covid-api.now.sh';
   static final _generalUrl = Uri.https(_baseUrl, '/api/general');
   static final _statesUrl = Uri.https(_baseUrl, '/api/states');
-  static final _districtsUrl = Uri.https(_baseUrl, 'api/districts');
+  static final _districtsUrl = Uri.https(_baseUrl, '/api/districts');
 
   /// The url of PNG image of the states of germany
   static const String statesMapImageURL =
