@@ -13,7 +13,7 @@ void _getCases() async {
 
 void _getStates() async {
   var statsGermany = await RKICovidAPI.getStates();
-  for (var state in statsGermany.states) {
+  for (var state in statsGermany.states!) {
     print(
         '${state.name}: cases: ${state.count} deaths: ${state.deaths} Cases per 100k: ${state.casesPer100K}');
   }
@@ -21,7 +21,7 @@ void _getStates() async {
 
 void _getDistricts() async {
   var statsGermany = await RKICovidAPI.getDisctricts();
-  for (var district in statsGermany.districts) {
+  for (var district in statsGermany.districts!) {
     print(
         '${district.name}: cases: ${district.count} deaths: ${district.deaths} Cases per 100k: ${district.casesPer100K}');
   }

@@ -11,8 +11,8 @@ class CovidStates {
     this.states,
   });
 
-  int lastUpdate;
-  List<State> states;
+  int? lastUpdate;
+  List<State>? states;
 
   factory CovidStates.fromJson(Map<String, dynamic> json) => CovidStates(
         lastUpdate: json['lastUpdate'],
@@ -21,7 +21,7 @@ class CovidStates {
 
   Map<String, dynamic> toJson() => {
         'lastUpdate': lastUpdate,
-        'states': List<dynamic>.from(states.map((x) => x.toJson())),
+        'states': List<dynamic>.from(states!.map((x) => x.toJson())),
       };
 }
 
@@ -35,12 +35,12 @@ class State {
     this.code,
   });
 
-  String name;
-  int count;
-  double weekIncidence;
-  double casesPer100K;
-  int deaths;
-  String code;
+  String? name;
+  int? count;
+  double? weekIncidence;
+  double? casesPer100K;
+  int? deaths;
+  String? code;
 
   factory State.fromJson(Map<String, dynamic> json) => State(
         name: json['name'],

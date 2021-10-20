@@ -14,11 +14,11 @@ class CovidCases {
     this.difference,
   });
 
-  String lastUpdate;
-  int recovered;
-  int cases;
-  int deaths;
-  Difference difference;
+  String? lastUpdate;
+  int? recovered;
+  int? cases;
+  int? deaths;
+  Difference? difference;
 
   @override
   String toString() =>
@@ -37,7 +37,7 @@ class CovidCases {
         'recovered': recovered,
         'cases': cases,
         'deaths': deaths,
-        'difference': difference.toJson(),
+        'difference': difference!.toJson(),
       };
 }
 
@@ -48,9 +48,9 @@ class Difference {
     this.deaths,
   });
 
-  int recovered;
-  int cases;
-  int deaths;
+  int? recovered;
+  int? cases;
+  int? deaths;
 
   factory Difference.fromJson(Map<String, dynamic> json) => Difference(
         recovered: json['recovered'],
