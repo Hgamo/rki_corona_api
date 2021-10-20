@@ -16,18 +16,18 @@ import 'data/states.dart';
 ///
 /// You can also use `statesMapImageURL` and `disctrictsMapImageURL` to get a url for a map of the states and disctricts.
 class RKICovidAPI {
-  static final _baseUrl = 'rki-covid-api.now.sh';
+  static final _baseUrl = 'thingproxy.freeboard.io/fetch/https://rki-covid-api.now.sh';
   static final _generalUrl = Uri.https(_baseUrl, '/api/general');
   static final _statesUrl = Uri.https(_baseUrl, '/api/states');
   static final _districtsUrl = Uri.https(_baseUrl, 'api/districts');
 
   /// The url of PNG image of the states of germany
   static const String statesMapImageURL =
-      'https://rki-covid-api.now.sh/api/states-map';
+      'https://thingproxy.freeboard.io/fetch/https://rki-covid-api.now.sh/api/states-map';
 
   /// The url of PNG image of the disctricts in germany
   static const String disctrictsMapImageURL =
-      'https://rki-covid-api.now.sh/api/districts-map';
+      'https://thingproxy.freeboard.io/fetch/https://rki-covid-api.now.sh/api/districts-map';
 
   /// Get the current COVID cases of germany.
   ///
