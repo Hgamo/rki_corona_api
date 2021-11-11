@@ -10,17 +10,19 @@ class Districts {
     this.districts,
   });
 
-  String? lastUpdate;
+  DateTime? lastUpdate;
   List<District>? districts;
 
   factory Districts.fromJson(Map<String, dynamic> json) => Districts(
-        lastUpdate: json['lastUpdate'],
-        districts: List<District>.from(
-            json['districts'].map((x) => District.fromJson(x))),
+        lastUpdate: DateTime.parse(json['meta']['lastUpdate']),
+        districts: (json['data'] as Map<String, dynamic>)
+            .values
+            .map((e) => District.fromJson(e))
+            .toList(),
       );
 
   Map<String, dynamic> toJson() => {
-        'lastUpdate': lastUpdate,
+        'lastUpdate': lastUpdate.toString(),
         'districts': List<dynamic>.from(districts!.map((x) => x.toJson())),
       };
 }
@@ -47,11 +49,11 @@ class District {
   factory District.fromJson(Map<String, dynamic> json) => District(
         name: json['name'],
         county: json['county'],
-        count: json['count'],
+        count: json['cases'],
         deaths: json['deaths'],
         weekIncidence: json['weekIncidence'].toDouble(),
         casesPer100K: json['casesPer100k'].toDouble(),
-        casesPerPopulation: json['casesPerPopulation'].toDouble(),
+        casesPerPopulation: json['cases'] / json['population'],
       );
 
   Map<String, dynamic> toJson() => {

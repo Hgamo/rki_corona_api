@@ -17,19 +17,19 @@ import 'data/states.dart';
 /// You can also use `statesMapImageURL` and `disctrictsMapImageURL` to get a url for a map of the states and disctricts.
 class RKICovidAPI {
   static final _generalUrl = Uri.parse(
-      'https://rki.marlon-lueckert.de/api/general');
+      'https://api.corona-zahlen.org/germany/');
   static final _statesUrl = Uri.parse(
-      'https://rki.marlon-lueckert.de/api/states');
+      'https://api.corona-zahlen.org/states/');
   static final _districtsUrl = Uri.parse(
-      'https://rki.marlon-lueckert.de/api/districts');
+      'https://api.corona-zahlen.org/districts/');
 
   /// The url of PNG image of the states of germany
   static const String statesMapImageURL =
-      'https://rki.marlon-lueckert.de/api/states-map';
+      'https://api.corona-zahlen.org/map/states';
 
   /// The url of PNG image of the disctricts in germany
   static const String disctrictsMapImageURL =
-      'https://rki.marlon-lueckert.de/api/districts-map';
+      'https://api.corona-zahlen.org/map/districts';
 
   /// Get the current COVID cases of germany.
   ///

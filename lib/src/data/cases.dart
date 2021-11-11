@@ -14,7 +14,7 @@ class CovidCases {
     this.difference,
   });
 
-  String? lastUpdate;
+  DateTime? lastUpdate;
   int? recovered;
   int? cases;
   int? deaths;
@@ -25,15 +25,15 @@ class CovidCases {
       'CovidCases(cases: $cases, deaths: $deaths, difference: $difference, lastUpdate: $lastUpdate, recovered: $recovered)';
 
   factory CovidCases.fromJson(Map<String, dynamic> json) => CovidCases(
-        lastUpdate: json['lastUpdate'],
+        lastUpdate: DateTime.parse(json['meta']['lastUpdate']),
         recovered: json['recovered'],
         cases: json['cases'],
         deaths: json['deaths'],
-        difference: Difference.fromJson(json['difference']),
+        difference: Difference.fromJson(json['delta']),
       );
 
   Map<String, dynamic> toJson() => {
-        'lastUpdate': lastUpdate,
+        'lastUpdate': lastUpdate.toString(),
         'recovered': recovered,
         'cases': cases,
         'deaths': deaths,
