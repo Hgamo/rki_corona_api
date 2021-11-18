@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:rki_corona_api/rki_corona_api.dart';
+
 CovidCases covidCasesFromJson(String str) =>
     CovidCases.fromJson(json.decode(str));
 
@@ -12,6 +14,7 @@ class CovidCases {
     this.cases,
     this.deaths,
     this.difference,
+    this.hospitalization,
   });
 
   DateTime? lastUpdate;
@@ -19,6 +22,7 @@ class CovidCases {
   int? cases;
   int? deaths;
   Difference? difference;
+  Hospitalization? hospitalization;
 
   @override
   String toString() =>
@@ -30,6 +34,7 @@ class CovidCases {
         cases: json['cases'],
         deaths: json['deaths'],
         difference: Difference.fromJson(json['delta']),
+        hospitalization: Hospitalization.fromJson(json['hospitalization']),
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,6 +43,7 @@ class CovidCases {
         'cases': cases,
         'deaths': deaths,
         'difference': difference!.toJson(),
+        'hospitalization': hospitalization!.toJson(),
       };
 }
 

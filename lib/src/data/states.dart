@@ -16,7 +16,10 @@ class CovidStates {
 
   factory CovidStates.fromJson(Map<String, dynamic> json) => CovidStates(
         lastUpdate: DateTime.parse(json['meta']['lastUpdate']),
-        states: (json['data'] as Map<String, dynamic>).values.map((e) => State.fromJson(e)).toList(),
+        states: (json['data'] as Map<String, dynamic>)
+            .values
+            .map((e) => State.fromJson(e))
+            .toList(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -33,6 +36,7 @@ class State {
     this.casesPer100K,
     this.deaths,
     this.code,
+    this.hospitalization,
   });
 
   String? name;
@@ -41,6 +45,7 @@ class State {
   double? casesPer100K;
   int? deaths;
   String? code;
+  Hospitalization? hospitalization;
 
   factory State.fromJson(Map<String, dynamic> json) => State(
         name: json['name'],
@@ -49,6 +54,7 @@ class State {
         casesPer100K: json['casesPer100k'].toDouble(),
         deaths: json['deaths'],
         code: json['abbreviation'],
+        hospitalization: Hospitalization.fromJson(json['hospitalization']),
       );
 
   Map<String, dynamic> toJson() => {
@@ -58,5 +64,27 @@ class State {
         'casesPer100k': casesPer100K,
         'deaths': deaths,
         'code': code,
+        'hospitalization': hospitalization!.toJson(),
+      };
+}
+
+class Hospitalization {
+  Hospitalization({
+    this.cases7Days,
+    this.incidence7Days,
+  });
+
+  double? cases7Days;
+  double? incidence7Days;
+
+  factory Hospitalization.fromJson(Map<String, dynamic> json) =>
+      Hospitalization(
+        cases7Days: json['cases7Days'].toDouble(),
+        incidence7Days: json['incidence7Days'].toDouble(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'cases7Days': cases7Days,
+        'incidence7Days': incidence7Days,
       };
 }
